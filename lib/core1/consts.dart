@@ -1,0 +1,1 @@
+var API="https://api.tidenscoin.com";
