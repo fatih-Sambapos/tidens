@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:metrik_v2/core/extensions/string/image_path_extensions.dart';
-import 'package:metrik_v2/core/extensions/extensions_shelf.dart';
+import 'package:tidens_coin/core/extensions/string/image_path_extensions.dart';
+import 'package:tidens_coin/core/extensions/extensions_shelf.dart';
 
 enum TabItem { home, search, reports, profile }
 

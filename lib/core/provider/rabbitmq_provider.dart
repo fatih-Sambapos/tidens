@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:dart_amqp/dart_amqp.dart' as amqp;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:metrik_v2/core/constants/api/json_constants.dart';
-import 'package:metrik_v2/core/init/network/network_manager.dart';
+import 'package:tidens_coin/core/constants/api/json_constants.dart';
+import 'package:tidens_coin/core/init/network/network_manager.dart';
 
 import '../models/custom_report_names/custom_report_names_model.dart';
 import '../models/item_sales_model/item_sales_model.dart';

@@ -1,4 +1,4 @@
-import 'package:metrik_v2/core/provider/login_provider.dart';
+import 'package:tidens_coin/core/provider/login_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

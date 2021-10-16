@@ -5,8 +5,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:metrik_v2/views/screens/search/search_screen.dart';
-import 'package:metrik_v2/views/views_shelf.dart';
+import 'package:tidens_coin/views/views_shelf.dart';
 
 import '../../core_shelf.dart';
 
@@ -111,8 +110,8 @@ class Utils {
             ? Padding(
                 padding: EdgeInsets.only(right: context.width * 3),
                 child: IconButton(
-                  onPressed: () => Navigator.pushNamed(
-                      context, NavigationConstants.notifications),
+                  onPressed: () => {}, // Navigator.pushNamed(
+                  // context, NavigationConstants.notifications),
                   icon: Icon(
                     CupertinoIcons.bell,
                   ),
@@ -134,8 +133,8 @@ class Utils {
             ? Padding(
                 padding: EdgeInsets.only(right: context.width * 3),
                 child: IconButton(
-                  onPressed: () => Navigator.pushNamed(
-                      context, NavigationConstants.notifications),
+                  onPressed: () => {}, // Navigator.pushNamed(
+                  // context, NavigationConstants.notifications),
                   icon: Icon(
                     CupertinoIcons.bell,
                   ),
@@ -200,8 +199,8 @@ class Utils {
             ),
           ),
           InkWell(
-            onTap: () => Navigator.pushNamed(
-                context, NavigationConstants.profileSettings),
+            onTap: () => {}, // Navigator.pushNamed(
+            // context, NavigationConstants.notifications),
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             child: ClipOval(
@@ -235,9 +234,8 @@ class Utils {
           MouseRegion(
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, NavigationConstants.notifications);
-              },
+              onTap: () => {}, // Navigator.pushNamed(
+              // context, NavigationConstants.notifications),
               child: Padding(
                 padding: EdgeInsets.only(top: 8.0),
                 child: SvgPicture.asset(
@@ -262,9 +260,9 @@ class Utils {
   Map<TabItem, Widget> allPages() {
     return {
       TabItem.home: HomeScreen(),
-      TabItem.search: SearchScreen(),
-      TabItem.reports: ReportListScreen(),
-      TabItem.profile: Settings()
+      TabItem.search: HomeScreen(),
+      TabItem.reports: HomeScreen(),
+      TabItem.profile: HomeScreen()
     };
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:metrik_v2/core/init/init_shelf.dart';
+import 'package:tidens_coin/core/init/init_shelf.dart';
 
 import '../../core_shelf.dart';
 
@@ -53,7 +53,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           final showItem = TabItem.values[index];
           return CupertinoTabView(
               // ignore: missing_return
-              onGenerateRoute: NavigationRoute.instance.generateRoute,
+              // onGenerateRoute: NavigationRoute.instance.generateRoute,
               routes: widget.routes,
               navigatorKey: widget.navigatorKeys[showItem],
               builder: (context) => widget.pageBuilder[showItem]!);

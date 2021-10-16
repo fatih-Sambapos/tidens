@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metrik_v2/core/core_shelf.dart';
+import 'package:tidens_coin/core/core_shelf.dart';
 
 class NavBarController extends ChangeNotifier {
   NavBarController(this.context);
