@@ -24,7 +24,8 @@ void main() async {
       ),
     ),
   );
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom]);
 }
 
 class MyApp extends StatefulWidget with core.Routes {
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       data: const MediaQueryData(),
       child: core.Consumer2<core.LanguageProvider, core.ThemeProvider>(
         builder: (context, langModel, themeModel, child) => MaterialApp(
-          title: 'Metrik',
+          title: 'Tidens',
           debugShowCheckedModeBanner: false,
           theme: widget.themeProvider.theme,
           localizationsDelegates: [...core.AppLocalizations.localDelegates],

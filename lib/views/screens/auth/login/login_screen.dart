@@ -37,7 +37,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget getScaffold() {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          "LOGIN",
+          style: TextStyle(color: Colors.grey),
+        ),
+      ),
+      // backgroundColor: Colors.transparent,
       body: LayoutBuilder(builder: (context, constraints) {
         return scrollContent();
       }),
@@ -50,124 +58,116 @@ class _LoginScreenState extends State<LoginScreen> {
           ? const BouncingScrollPhysics()
           : const NeverScrollableScrollPhysics(),
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: context.height * 97),
-        child: getColumn(false),
+        constraints: BoxConstraints(maxHeight: context.height * 100),
+        child: getColumn(),
       ),
     );
   }
 
-  Widget getColumn(bool isWeb) {
+  Widget getColumn() {
     return Align(
-      alignment: Alignment.center,
+      alignment: Alignment.topCenter,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          //const Spacer(flex: 1),
-          // Expanded(flex: 4, child: mobileLanguage(isWeb)),
-          // //const Spacer(flex: 1),
-          // Expanded(flex: 4, child: 'logo'.pngImageAsset),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 2, child: welcomeText(isWeb)),
-          // Spacer(
-          //   flex: 2,
-          // ), //Expanded(flex: 2, child: slogan(isWeb)),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 4, child: textField('email', isWeb)),
-          // Expanded(flex: 4, child: textField('password', isWeb)),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 3, child: loginButton(isWeb)),
-          // //const Spacer(flex: 1),
-          // Expanded(flex: 3, child: forgotPassword(isWeb)),
-          // const Spacer(flex: 13),
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AuthElevatedButton(
-                  onPressed: () {},
-                  isLoading: false,
-                  imgUrl: "assets/g.png",
-                  btnTxt: "Login with",
-                  bgColor: Colors.red[900],
-                ),
-                AuthElevatedButton(
-                  onPressed: () {},
-                  isLoading: false,
-                  imgUrl: "assets/f.png",
-                  btnTxt: "Login with",
-                  bgColor: Color(0xFF3A5999),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text("OR", style: TextStyle(color: Colors.grey)),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
-                  child: Divider(
-                    color: Colors.black,
-                  ),
-                ),
-                AuthTextFormField(
-                  // controller: controller.usernameController,
-                  hint: "Username or E-mail",
-                  prefixIcon: Icons.email,
-                  obscureText: false,
-                ),
-                AuthTextFormField(
-                  // controller: controller.passwordController,
-                  hint: "Password",
-                  prefixIcon: Icons.lock,
-                  obscureText: true,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (BuildContext context) =>
-                    //             ForgotPassword()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Text("Forgot Password?",
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't you have an account yet? ",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 17,
-                          )),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      RegisterScreen()));
-                        },
-                        child: Text("Sign Up",
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+          Spacer(flex: 2),
+          loginMethod(
+              "assets/g.png", Colors.red.shade900, "login_with".translate),
+          loginMethod(
+              "assets/f.png", Color(0xFF3A5999), "login_with".translate),
+          authDivider(),
+          textField('email', Icons.email),
+          textField('password', Icons.lock),
+          forgotPassword(),
+          loginButton('login'),
+          routeRegister(),
+          Spacer(flex: 5),
+        ],
+      ),
+    );
+  }
+
+  Padding routeRegister() {
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("dont_you_have_an_account_yet".translate,
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 17,
+              )),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => RegisterScreen()));
+            },
+            child: Text("signup".translate,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector forgotPassword() {
+    return GestureDetector(
+      onTap: () {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (BuildContext context) =>
+        //             ForgotPassword()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: Text('forgot_password'.translate,
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
+    );
+  }
+
+  AuthElevatedButton loginMethod(String icon, Color color, String btnText) {
+    return AuthElevatedButton(
+      onPressed: () {},
+      isLoading: false,
+      imgUrl: icon,
+      btnTxt: btnText,
+      bgColor: color,
+    );
+  }
+
+  Widget authDivider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: context.height * 2),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: Divider(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Text("or".translate, style: TextStyle(color: Colors.grey)),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: Divider(
+                color: Colors.black,
+              ),
             ),
           ),
         ],
@@ -175,33 +175,44 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget loginButton(bool isWeb) {
+  Widget textField(String type, IconData prefixIcon) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 5, vertical: context.height),
+      child: RoundedTextButton(
+        onChanged: type == 'email' ? _changeEmail : _changePass,
+        visibility: type == 'email' ? true : visible,
+        changeVisibility: _changeVisibility,
+        hintTextKey: type,
+        prefixIcon: prefixIcon,
+        isWeb: false,
+      ),
+    );
+  }
+
+  Widget loginButton(String btnTextKey) {
     var btnColor = context.primaryDarkColor;
     if (email == '' || password == '') {
-      btnColor = context.darkGreyColor;
+      btnColor = context.secondaryGreen;
     } else {
-      btnColor = context.primaryColor;
+      btnColor = context.secondaryGreen;
     }
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: context.width * (isWeb ? 43 : 7)),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 5, vertical: context.height),
       child: RoundedButton(
-        buttonTextKey: 'login', //.translate,
-        action: () {
-          AuthFunctions.instance.login(email, password, context);
-        },
-        borderRadius: isWeb
-            ? BorderRadius.circular(5)
-            : context.lowCircular, // BorderRadius.circular(isWeb ? 55 : 40),
-        backgroundColor: btnColor,
-        borderColor: btnColor,
-        borderWidth: 1,
-        textStyle: isWeb
-            ? context.headline2
-                .copyWith(fontSize: context.height * 2, color: Colors.white)
-            : context.headline3
-                .copyWith(fontSize: context.width * 6, color: Colors.white),
-      ),
+          buttonTextKey: btnTextKey,
+          action: () {
+            // Navigator.pushNamed(context, NavigationConstants.home);
+            AuthFunctions.instance.login(email, password, context);
+          },
+          borderRadius:
+              context.lowCircular, // BorderRadius.circular(isWeb ? 55 : 40),
+          backgroundColor: btnColor,
+          borderColor: btnColor,
+          borderWidth: 1,
+          textStyle: context.headline2
+              .copyWith(fontSize: context.height * 2, color: Colors.white)),
     );
   }
 

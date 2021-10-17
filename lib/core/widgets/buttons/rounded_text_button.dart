@@ -6,7 +6,7 @@ import '../../core_shelf.dart';
 class RoundedTextButton extends StatelessWidget {
   final Function(String) onChanged;
   final String hintTextKey;
-  // final IconData prefixIcon;
+  final IconData prefixIcon;
   final bool visibility;
   final bool isWeb;
   final Function()? changeVisibility;
@@ -17,7 +17,7 @@ class RoundedTextButton extends StatelessWidget {
     this.changeVisibility,
     this.isWeb = false,
     Key? key,
-    // this.prefixIcon,
+    required this.prefixIcon,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class RoundedTextButton extends StatelessWidget {
           : TextFormDeco.instance.loginDeco(
               context,
               hintTextKey,
-              // prefixIcon,
+              prefixIcon,
               isWeb,
             ),
       onChanged: onChanged,
@@ -44,7 +44,7 @@ class RoundedTextButton extends StatelessWidget {
         .loginDeco(
           context,
           hintTextKey,
-          // prefixIcon,
+          prefixIcon,
           isWeb,
         )
         .copyWith(

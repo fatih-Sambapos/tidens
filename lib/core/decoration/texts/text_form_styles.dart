@@ -9,7 +9,7 @@ class TextFormDeco {
   InputDecoration loginDeco(
     BuildContext context,
     String hintTextKey,
-    // IconData prefixIcon,
+    IconData? prefixIcon,
     bool isWeb,
   ) {
     return InputDecoration(
@@ -36,25 +36,25 @@ class TextFormDeco {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: isWeb ? BorderRadius.circular(5) : context.lowCircular,
-        borderSide: BorderSide(width: 1, color: context.primaryColor),
+        borderSide: BorderSide(width: 1, color: context.darkGreyColor),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: isWeb ? BorderRadius.circular(5) : context.lowCircular,
-        borderSide: BorderSide(width: 1, color: context.primaryColor),
+        borderSide: BorderSide(width: 1, color: context.darkGreyColor),
       ),
-      // prefixIcon: prefixIcon == null
-      //     ? SizedBox()
-      //     : Padding(
-      //         padding: EdgeInsets.only(
-      //           left: context.width * 2,
-      //           right: context.width * (isWeb ? 1 : 1.5),
-      //         ),
-      //         child: Icon(
-      //           prefixIcon,
-      //           color: context.primaryDarkColor,
-      //           size: context.height * (isWeb ? 4 : 3.3),
-      //         ),
-      //       ),
+      prefixIcon: prefixIcon == null
+          ? SizedBox()
+          : Padding(
+              padding: EdgeInsets.only(
+                left: context.width * 2,
+                right: context.width * (isWeb ? 1 : 1.5),
+              ),
+              child: Icon(
+                prefixIcon,
+                color: context.darkGreyColor,
+                size: context.height * (isWeb ? 4 : 3.3),
+              ),
+            ),
     );
   }
 }

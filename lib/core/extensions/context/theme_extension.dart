@@ -13,7 +13,7 @@ extension ThemeExtension on BuildContext {
   Color get secondaryDarkRed => Color(0xffB83000);
   Color get gradientLight => Color(0xffFF6359);
   Color get gradientDark => Color(0xffE20D00);
-  Color get secondaryGreen => Color(0xFF01B436);
+  Color get secondaryGreen => Color(0xFF2EB18D);
   Color get secondaryDarkBlue => Color(0xFF13064B);
   Color get shadowColor => Color(0xFFBCBCBC);
 

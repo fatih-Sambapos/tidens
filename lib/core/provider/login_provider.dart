@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -5,41 +6,26 @@ import 'package:flutter/material.dart';
 import '../core_shelf.dart';
 
 class LoginProvider extends ChangeNotifier {
-  Future<bool> userLogin(String email, String password) async {
+  Future<bool> userLogin(String username, String password) async {
     try {
-      var header = {'Content-Type': 'application/x-www-form-urlencoded'};
-      var data = {'email': '$email', 'password': '$password'};
+      var header = {'Content-Type': 'application/json'};
+      var data = {'src': 1, 'usr_name': '$username', 'usr_pass': '$password'};
       var body = await NetworkManager.instance.postRequest(
-        bodyFields: true,
+        bodyFields: false,
         url: userLoginApi,
         json: data,
         contentType: header,
       );
-      String status = await NetworkManager.instance.status;
-      if (NetworkManager.instance.status == "200") {
-        status = '200';
-        log("giriş");
-        notifyListeners();
+
+      var loginJson = jsonEncode(body);
+      var loginModel = LoginModel.fromJson(jsonDecode(loginJson));
+      if (loginModel.s == 1) {
+        log(loginModel.m!);
         return true;
       } else {
-        log("giremeyiş");
-        notifyListeners();
+        log(loginModel.m!);
         return false;
       }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<Map<String, dynamic>> checkLicense(String email) async {
-    String expirationDate;
-    bool haveLicense;
-    String url =
-        'http://cpapi.sambapos.com/customer-licenses/?license_email=$email&license_key=repx';
-    try {
-      var response = NetworkManager.instance.getRequest(url: url);
-      log(response.toString());
-      return response;
     } catch (e) {
       rethrow;
     }

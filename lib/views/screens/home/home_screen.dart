@@ -26,84 +26,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // isweb olup olmadığını bununla kontrol ediyoruz artık
-    var isWeb = Utils.instance.getGeneralType(context);
-    return getScaffold(isWeb);
+    return getScaffold();
   }
 
-  Widget getScaffold(DeviceType isWeb) {
-    return Scaffold(
-      drawer: HomeScreenDrawer(), //isWeb == DeviceType.web ? null :
-      appBar: isWeb == DeviceType.web
-          ? Utils.instance.getWebAppBar(
-              context,
-            )
-          : Utils.instance.getHomeAppBar(
-              context,
-              "home".translate,
-            ),
-      body: LayoutBuilder(builder: (context, constraints) {
-        if (Utils.instance.getDeviceType(context, constraints) ==
-            DeviceType.mobile) {
-          return scrollContent(isWeb);
-        } else {
-          return getColumn(isWeb);
-        }
-      }),
-    );
+  Widget getScaffold() {
+    return Scaffold(body: scrollContent());
   }
 
-  Widget scrollContent(DeviceType isWeb) {
+  Widget scrollContent() {
     return SingleChildScrollView(
       physics: context.viewBottomPad > 0
           ? const NeverScrollableScrollPhysics()
           : const BouncingScrollPhysics(),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: context.height * 100),
-        child: getColumn(isWeb),
-      ),
+      child: getColumn(),
     );
   }
 
-  Widget getColumn(DeviceType isWeb) {
+  Widget getColumn() {
     return SingleChildScrollView(
       child: Align(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SingleChildScrollView(
-              child: Stack(
-                children: [
-                  // DashboardTop(w: context.width, h: context.height),
-                  // DashboardBottom(h: h, w: w),
-                ],
-              ),
+            Stack(
+              children: [
+                DashboardTop(),
+                DashboardBottom(),
+                DashboardAppbar(),
+              ],
             ),
-            // DashboardAppbar(),
-            // sized(),
-            // mobilUsername(),
-            // sized(),
-            // mobileTopCard(),
-            // sized(),
-            // Padding(
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: context.width * 10,
-            //   ),
-            //   child: mobilSubHeader('revenues'.translate),
-            // ),
-            // sized(),
-            // mobileChart(),
-            // sized(),
-            // Padding(
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: context.width * 10,
-            //   ),
-            //   child: mobilSubHeader('total'.translate),
-            // ),
-            // sized(),
-            // mobileTotalCards(),
-            // sized(),
           ],
         ),
       ),
@@ -114,33 +66,31 @@ class _HomeScreenState extends State<HomeScreen> {
 class DashboardAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      child: Container(
-        height: 65,
-        child: AppBar(
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.white.withOpacity(0.05),
-          leading: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Material(
-                elevation: 7,
-                color: Colors.transparent,
-                child: Icon(Icons.notifications_active_outlined, size: 30)),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Material(
-                elevation: 7,
-                color: Colors.transparent,
-                child: Icon(
-                  Icons.menu_rounded,
-                  size: 30,
-                ),
-              ),
-            )
-          ],
+    return Container(
+      height: 65,
+      child: AppBar(
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.white.withOpacity(0.05),
+        leading: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Material(
+              elevation: 7,
+              color: Colors.transparent,
+              child: Icon(Icons.notifications_active_outlined, size: 30)),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Material(
+              elevation: 7,
+              color: Colors.transparent,
+              child: Icon(
+                Icons.menu_rounded,
+                size: 30,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -150,14 +100,12 @@ class DashboardBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: context.height * 0.30),
+      margin: EdgeInsets.only(top: context.height * 30),
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         child: Container(
-          width: context.width,
-          height: context.height,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30), topRight: Radius.circular(30))),
@@ -336,8 +284,7 @@ class DashboardTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.width,
-      height: context.height * 0.4,
+      height: context.height * 40,
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
           Color(0xFF3C6FDD),

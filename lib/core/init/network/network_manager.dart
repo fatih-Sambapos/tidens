@@ -33,7 +33,6 @@ class NetworkManager {
       } else {
         request.body = jsonEncode(json);
       }
-
       request.headers.addAll(contentType);
       StreamedResponse response = await request.send();
       Map<String, dynamic> body =
@@ -45,28 +44,6 @@ class NetworkManager {
       rethrow;
     }
   }
-
-  // Future<Map<String, dynamic>> postRequest({
-  //   required String url,
-  //   required Map<String, dynamic> json,
-  //   String? token = '',
-  // }) async {
-  //   try {
-  //     _service.options.contentType =
-  //         ContentType.parse('application/x-www-form-urlencoded').toString();
-  //     final res = await _service.post(
-  //       url,
-  //       data: json.toString(),
-  //       options: Options(headers: {
-  //         HttpHeaders.contentTypeHeader: _service.options.contentType,
-  //         'Authorization': token
-  //       }),
-  //     );
-  //     return jsonDecode(res.toString());
-  //   } on DioError {
-  //     rethrow;
-  //   }
-  // }
 
   Future<Map<String, dynamic>> getRequest({
     required String url,

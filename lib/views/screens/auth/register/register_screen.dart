@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../views_shelf.dart';
 import '../../../../core/core_shelf.dart';
+import '../auth_functions.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -37,19 +38,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            "SIGN UP",
+            'SIGN UP',
             style: TextStyle(color: Colors.grey),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 15.0),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.menu_rounded, color: Colors.grey, size: 30)),
-            )
-          ],
         ),
-        backgroundColor: Colors.transparent,
         body: scrollContent());
   }
 
@@ -67,128 +59,151 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget getColumn(bool isWeb) {
     return Align(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AuthElevatedButton(
-                  onPressed: () {},
-                  imgUrl: "assets/g.png",
-                  btnTxt: "Login with",
-                  bgColor: Colors.red[900],
-                ),
-                AuthElevatedButton(
-                  onPressed: () {},
-                  imgUrl: "assets/f.png",
-                  btnTxt: "Login with",
-                  bgColor: Color(0xFF3A5999),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text("OR", style: TextStyle(color: Colors.grey)),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30.0, right: 30, bottom: 20),
-                  child: Divider(
-                    color: Colors.black,
-                  ),
-                ),
-                AuthTextFormField(
-                  hint: "Full name",
-                  prefixIcon: Icons.person,
-                  obscureText: false,
-                ),
-                AuthTextFormField(
-                  hint: "E-mail",
-                  prefixIcon: Icons.email,
-                  obscureText: false,
-                ),
-                AuthTextFormField(
-                  hint: "Password",
-                  prefixIcon: Icons.lock,
-                  obscureText: true,
-                ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (BuildContext context) =>
-                //                 ForgotPassword()));
-                //   },
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(25.0),
-                //     child: Text("Forgot Password?",
-                //         style: TextStyle(
-                //           color: Colors.black87,
-                //           fontSize: 17,
-                //           fontWeight: FontWeight.bold,
-                //         )),
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: AuthElevatedButton(
-                    onPressed: () {},
-                    bgColor: Color(0xFF2EB18D),
-                    btnTxt: "Sign Up",
-                    imgUrl: null,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Already have an account? ",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
-                          )),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      LoginScreen()));
-                        },
-                        child: Text("Login",
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
+          Spacer(flex: 2),
+          loginMethod(
+              'assets/g.png', Colors.red.shade900, 'signup_with'.translate),
+          loginMethod(
+              'assets/f.png', Color(0xFF3A5999), 'signup_with'.translate),
+          authDivider(),
+          textField('full_name', Icons.person),
+          textField('email', Icons.email),
+          textField('password', Icons.lock),
+          authButton('signup'),
+          routeLogin(),
+          Spacer(flex: 5)
         ]));
   }
+
+  AuthElevatedButton loginMethod(String icon, Color color, String btnText) {
+    return AuthElevatedButton(
+      onPressed: () {},
+      isLoading: false,
+      imgUrl: icon,
+      btnTxt: btnText,
+      bgColor: color,
+    );
+  }
+
+  Widget authDivider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: context.height * 2),
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: Divider(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Text("or".translate, style: TextStyle(color: Colors.grey)),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30),
+              child: Divider(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget routeLogin() {
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('already_have_an_account'.translate,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 17,
+              )),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => LoginScreen()));
+            },
+            child: Text('login'.translate,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget textField(String type, IconData prefixIcon) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 5, vertical: context.height),
+      child: RoundedTextButton(
+        onChanged: type == 'email' ? _changeEmail : _changePass,
+        visibility: type == 'email' ? true : visible,
+        changeVisibility: _changeVisibility,
+        hintTextKey: type,
+        prefixIcon: prefixIcon,
+        isWeb: false,
+      ),
+    );
+  }
+
+  Widget authButton(String buttonTextKey) {
+    var btnColor = context.primaryDarkColor;
+    if (email == '' || password == '') {
+      btnColor = context.secondaryGreen;
+    } else {
+      btnColor = context.secondaryGreen;
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 5, vertical: context.height),
+      child: RoundedButton(
+          buttonTextKey: buttonTextKey,
+          action: () {
+            AuthFunctions.instance.login(email, password, context);
+          },
+          borderRadius:
+              context.lowCircular, // BorderRadius.circular(isWeb ? 55 : 40),
+          backgroundColor: btnColor,
+          borderColor: btnColor,
+          borderWidth: 1,
+          textStyle: context.headline2
+              .copyWith(fontSize: context.height * 2, color: Colors.white)),
+    );
+  }
+
+  void _changeEmail(String newEmail) {
+    setState(() {
+      email = newEmail;
+    });
+  }
+
+  void _changePass(String newPass) {
+    setState(() {
+      password = newPass;
+    });
+  }
+
+  void _changeVisibility() {
+    setState(() {
+      visible = !visible;
+    });
+  }
+
+  Future<bool> customOnWillPop() async {
+    triedExit = !triedExit;
+    if (!triedExit) return true;
+    return false;
+  }
 }
-          //const Spacer(flex: 1),
-          // Expanded(flex: 4, child: mobileLanguage(isWeb)),
-          // //const Spacer(flex: 1),
-          // Expanded(flex: 4, child: 'logo'.pngImageAsset),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 2, child: welcomeText(isWeb)),
-          // Spacer(
-          //   flex: 2,
-          // ), //Expanded(flex: 2, child: slogan(isWeb)),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 4, child: textField('email', isWeb)),
-          // Expanded(flex: 4, child: textField('password', isWeb)),
-          // const Spacer(flex: 1),
-          // Expanded(flex: 3, child: loginButton(isWeb)),
-          // //const Spacer(flex: 1),
-          // Expanded(flex: 3, child: forgotPassword(isWeb)),
-          // const Spacer(flex: 13),
-
-
