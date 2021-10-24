@@ -13,29 +13,29 @@ class TabItemData {
 
   static Map<TabItem, TabItemData> allTabs(BuildContext context) => {
         TabItem.home: TabItemData(
-            selectedPicture: selected('home'),
-            unselectedPicture: unSelected(context, 'home')),
+            selectedPicture: selected(Icons.home_outlined),
+            unselectedPicture: unSelected(context, Icons.home_outlined)),
         TabItem.search: TabItemData(
-            selectedPicture: selected('search'),
-            unselectedPicture: unSelected(context, 'search')),
+            selectedPicture: selected(Icons.all_inclusive),
+            unselectedPicture: unSelected(context, Icons.all_inclusive)),
         TabItem.reports: TabItemData(
-            selectedPicture: selected('report'),
-            unselectedPicture: unSelected(context, 'report')),
+            selectedPicture: selected(Icons.history_rounded),
+            unselectedPicture: unSelected(context, Icons.history_rounded)),
         TabItem.profile: TabItemData(
-            selectedPicture: selected('profile'),
-            unselectedPicture: unSelected(context, 'profile')),
+            selectedPicture: selected(Icons.repeat),
+            unselectedPicture: unSelected(context, Icons.repeat)),
       };
 
-  static Widget selected(String selected) {
-    return SvgPicture.asset(
-      selected.toIconSVG,
-    );
+  static Widget selected(IconData selected) {
+    return Icon(selected, color: Color(0xFFC5B38B));
+
+    ///TODO icon main color add
+    // SvgPicture.asset(
+    //   selected.toIconSVG,
+    // );
   }
 
-  static Widget unSelected(BuildContext context, String unselected) {
-    return SvgPicture.asset(
-      unselected.toIconSVG,
-      color: context.darkGreyColor,
-    );
+  static Widget unSelected(BuildContext context, IconData unselected) {
+    return Icon(unselected, color: context.darkGreyColor);
   }
 }

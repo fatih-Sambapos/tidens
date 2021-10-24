@@ -20,6 +20,8 @@
   "password": "Password",
   "login": "Login",
   "signup": "Sign Up",
+  "total_balance":"Total Balance",
+  "recent_transactions":"Recent Transactions",
   "login_with": "Sign up with",
   "signup_with": "Sign up with",
   "dont_you_have_an_account_yet": "Don't you have an account yet? ",
