@@ -21,9 +21,6 @@ class ApplicationProvider {
       create: (context) => ThemeProvider(),
     ),
     ChangeNotifierProvider(
-      create: (context) => RabbitmqProvider(),
-    ),
-    ChangeNotifierProvider(
       create: (context) => LoginProvider(),
     ),
     Provider.value(value: NavigationService.instance)

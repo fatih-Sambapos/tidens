@@ -71,13 +71,27 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Spacer(flex: 2),
-          loginMethod(
-              "assets/g.png", Colors.red.shade900, "login_with".translate),
-          loginMethod(
-              "assets/f.png", Color(0xFF3A5999), "login_with".translate),
-          authDivider(),
-          textField('email', Icons.email),
-          textField('password', Icons.lock),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: 'tidensLogo'.pngImageAsset,
+          ),
+          Spacer(),
+          textField(
+              'username',
+              Icon(
+                Icons.email,
+                color: context.darkGreyColor,
+                size: context.height * 3.3,
+              ),
+              true),
+          textField(
+              'password',
+              Icon(
+                Icons.lock,
+                color: context.darkGreyColor,
+                size: context.height * 3.3,
+              ),
+              true),
           forgotPassword(),
           loginButton('login'),
           routeRegister(),
@@ -175,17 +189,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget textField(String type, IconData prefixIcon) {
+  Widget textField(String type, Widget prefixIcon, bool enabled) {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: context.width * 5, vertical: context.height),
       child: RoundedTextButton(
-        onChanged: type == 'email' ? _changeEmail : _changePass,
-        visibility: type == 'email' ? true : visible,
+        onChanged: type == 'username' ? _changeEmail : _changePass,
+        visibility: type == 'username' ? true : visible,
         changeVisibility: _changeVisibility,
         hintTextKey: type,
         prefixIcon: prefixIcon,
         isWeb: false,
+        enabled: enabled,
       ),
     );
   }

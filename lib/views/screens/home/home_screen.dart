@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tidens_coin/views/components/home_screen_drawer.dart';
 import '../../../core/core_shelf.dart';
-import '../../views_shelf.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color(0xF9FAFB),
       appBar: appbar(),
-      drawer: Drawer(),
+      drawer: HomeScreenDrawer(),
       body: scrollContent(),
     );
   }
@@ -104,22 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "2,589.50",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "ACRO",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  topBalanceText('2,589.50'),
+                  topBalanceText('ACRO'),
                 ],
               ),
               Container(),
@@ -127,22 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "2,589.50 ₺",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    "TRY",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  topBalanceText('2,589.50'),
+                  topBalanceText('TRY'),
                 ],
               ),
               // Material(
@@ -162,6 +134,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Text topBalanceText(String text) {
+    return Text(
+      text,
+      style:
+          context.headline6.copyWith(color: context.accentColor, fontSize: 20),
     );
   }
 
@@ -339,6 +319,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tidens_coin/core/provider/rabbitmq_provider.dart';
 import 'package:tidens_coin/views/tab_screen/tab_screen.dart';
 
 import '../../../core/core_shelf.dart';
@@ -42,9 +43,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
           drawerBody(),
           // drawerDivider(),
           // Spacer(flex: 10),
-          SizedBox(height: context.height * 45),
-          drawerFooter(),
-          sizedBox()
+          SizedBox(height: context.height * 45), sizedBox()
         ],
       ),
     );
@@ -80,46 +79,32 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
     );
   }
 
-  List<String> drawerItems = [
-    'dashboard'.translate,
-    'my_reports'.translate,
-    'my_shops'.translate
-  ];
-  List<String> reportList = [
-    'end_of_day_reports'.translate,
-    'list_of_products'.translate,
-    'log_report'.translate
-  ];
+  List<String> drawerItems = ['Banka İşleri', 'Referanslar'];
+
   List<String> drawerItemsIcon = ['chart', 'report', 'store'];
 
   //List<bool> _isOpen = [false, false];
   Widget drawerBody() {
-    return Consumer<RabbitmqProvider>(
-      builder: (context, provider, _) {
-        var tableName =
-            provider.customReportNamesModel!.data.getCustomReportNames;
-        return Column(children: [
-          drawerListItem(drawerItems[0], [SizedBox()], drawerItemsIcon[0],
-              false, NavigationConstants.home),
-          drawerListItem(
-            drawerItems[1],
-            tableName?.map((e) {
-              return drawerSubListItem(e.name);
-            }).toList(),
-            drawerItemsIcon[1],
-            true,
-            NavigationConstants.home,
-          ),
-          drawerListItem(
-            drawerItems[2],
-            [SizedBox()],
-            drawerItemsIcon[2],
-            false,
-            NavigationConstants.home,
-          ),
-        ]);
-      },
-    );
+    return Column(children: [
+      drawerListItem(drawerItems[0], [SizedBox()], drawerItemsIcon[0], false,
+          NavigationConstants.home),
+      drawerListItem(drawerItems[1], [SizedBox()], drawerItemsIcon[1], false,
+          NavigationConstants.home),
+      // drawerListItem(
+      //   drawerItems[1],
+      //   [drawerSubListItem("e.name")],
+      //   drawerItemsIcon[1],
+      //   true,
+      //   NavigationConstants.home,
+      // ),
+      // drawerListItem(
+      //   drawerItems[1],
+      //   [SizedBox()],
+      //   drawerItemsIcon[2],
+      //   false,
+      //   NavigationConstants.home,
+      // ),
+    ]);
   }
 
   // ignore: unused_field
@@ -219,7 +204,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
 
   Divider drawerDivider() {
     return Divider(
-      color: Color(0xFFCE331D),
+      color: Color(0xFFCE331Dffffff),
       thickness: 1.5,
     );
   }
@@ -228,8 +213,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Spacer(flex: 4),
-        drawerTopAvatar(),
         Spacer(flex: 1),
         drawerTopUsername(),
         Spacer(flex: 10),
@@ -243,20 +226,14 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
     );
   }
 
-  Column drawerTopUsername() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AutoSizeText(
-          'Tuana Topal',
-          style: context.headline5.copyWith(
-              color: context.accentColor, fontWeight: FontWeight.bold),
-        ),
-        AutoSizeText(
-          'Beyoğlu ' + 'store'.translate,
-          style: context.headline6.copyWith(color: context.accentColor),
-        ),
-      ],
+  Widget drawerTopUsername() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: AutoSizeText(
+        'Ivan Barayev',
+        style: context.headline5
+            .copyWith(color: context.accentColor, fontWeight: FontWeight.bold),
+      ),
     );
   }
 
@@ -283,18 +260,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
           ], // red to yellow
           tileMode: TileMode.repeated, // repeats the gradient over the canvas
         ),
-      ),
-      child: Opacity(
-        opacity: 0.3,
-        child: Image(
-            image: AssetImage(
-              'assets/png/splashBackground.png',
-            ),
-            width: context.width * 100,
-            height: context.height * 100,
-            fit: BoxFit.fill
-            // fit: BoxFit.fitHeight,
-            ),
       ),
     );
   }

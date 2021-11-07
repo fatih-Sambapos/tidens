@@ -43,9 +43,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           backgroundColor: context.accentColor,
           items: [
             _createNavItem(TabItem.home),
-            _createNavItem(TabItem.search),
-            _createNavItem(TabItem.reports),
-            _createNavItem(TabItem.profile),
+            _createNavItem(TabItem.stake),
+            _createNavItem(TabItem.transactionHistory),
+            _createNavItem(TabItem.swap),
           ],
           onTap: (index) => widget.onSelectedTab(TabItem.values[index]),
         ),

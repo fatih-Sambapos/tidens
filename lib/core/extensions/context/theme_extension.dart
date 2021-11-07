@@ -11,11 +11,12 @@ extension ThemeExtension on BuildContext {
   Color get primaryDarkColor => theme.primaryColorDark;
   Color get secondaryPink => Color(0xffEB7998);
   Color get secondaryDarkRed => Color(0xffB83000);
-  Color get gradientLight => Color(0xffFF6359);
-  Color get gradientDark => Color(0xffE20D00);
+  // Color get gradientDark => Color(0xffE20D00);
   Color get secondaryGreen => Color(0xFF2EB18D);
   Color get secondaryDarkBlue => Color(0xFF13064B);
   Color get shadowColor => Color(0xFFBCBCBC);
+  Color get gradientLight => Color(0xFFC5B38B);
+  Color get gradientDark => Color(0xFFC5B38B);
 
   Color get highlightColor => theme.highlightColor;
 

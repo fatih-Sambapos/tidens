@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tidens_coin/core/extensions/string/image_path_extensions.dart';
 import 'package:tidens_coin/core/extensions/extensions_shelf.dart';
 
-enum TabItem { home, search, reports, profile }
+enum TabItem { home, stake, transactionHistory, swap }
 
 class TabItemData {
   final Widget? selectedPicture;
@@ -15,14 +15,14 @@ class TabItemData {
         TabItem.home: TabItemData(
             selectedPicture: selected(Icons.home_outlined),
             unselectedPicture: unSelected(context, Icons.home_outlined)),
-        TabItem.search: TabItemData(
-            selectedPicture: selected(Icons.all_inclusive),
+        TabItem.stake: TabItemData(
+            selectedPicture: selected(Icons.all_inclusive), // stake
             unselectedPicture: unSelected(context, Icons.all_inclusive)),
-        TabItem.reports: TabItemData(
-            selectedPicture: selected(Icons.history_rounded),
+        TabItem.transactionHistory: TabItemData(
+            selectedPicture: selected(Icons.history_rounded), //   işlem geçmişi
             unselectedPicture: unSelected(context, Icons.history_rounded)),
-        TabItem.profile: TabItemData(
-            selectedPicture: selected(Icons.repeat),
+        TabItem.swap: TabItemData(
+            selectedPicture: selected(Icons.repeat), // gönder al
             unselectedPicture: unSelected(context, Icons.repeat)),
       };
 
@@ -39,3 +39,6 @@ class TabItemData {
     return Icon(unselected, color: context.darkGreyColor);
   }
 }
+
+///TODO: gönder al sayfası:
+///

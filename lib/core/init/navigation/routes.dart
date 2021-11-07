@@ -11,5 +11,10 @@ mixin Routes {
   final Map<String, Widget Function(BuildContext)> routes = {
     NavigationConstants.login: (_) => LoginScreen(),
     NavigationConstants.home: (_) => TabScreen(),
+    NavigationConstants.swap: (_) => SwapScreen(),
+    NavigationConstants.stake: (_) => StakeScreen(),
+    NavigationConstants.transactionHistory: (_) => TransactionHistoryScreen(),
+    NavigationConstants.settings: (_) => SettingsScreen(),
+    NavigationConstants.profile: (_) => ProfileScreen(),
   };
 }

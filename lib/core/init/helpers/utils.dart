@@ -252,17 +252,17 @@ class Utils {
 
   Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
     TabItem.home: GlobalKey<NavigatorState>(),
-    TabItem.search: GlobalKey<NavigatorState>(),
-    TabItem.reports: GlobalKey<NavigatorState>(),
-    TabItem.profile: GlobalKey<NavigatorState>()
+    TabItem.stake: GlobalKey<NavigatorState>(),
+    TabItem.transactionHistory: GlobalKey<NavigatorState>(),
+    TabItem.swap: GlobalKey<NavigatorState>()
   };
 
   Map<TabItem, Widget> allPages() {
     return {
       TabItem.home: HomeScreen(),
-      TabItem.search: HomeScreen(),
-      TabItem.reports: HomeScreen(),
-      TabItem.profile: HomeScreen()
+      TabItem.stake: StakeScreen(),
+      TabItem.transactionHistory: TransactionHistoryScreen(),
+      TabItem.swap: SwapScreen()
     };
   }
 

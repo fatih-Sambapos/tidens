@@ -6,18 +6,15 @@ class TextFormDeco {
   static final TextFormDeco _instance = TextFormDeco();
   static TextFormDeco get instance => _instance;
 
-  InputDecoration loginDeco(
-    BuildContext context,
-    String hintTextKey,
-    IconData? prefixIcon,
-    bool isWeb,
-  ) {
+  InputDecoration loginDeco(BuildContext context, String hintTextKey,
+      Widget? prefixIcon, bool isWeb, bool enabled) {
     return InputDecoration(
+      enabled: enabled,
       filled: true,
       fillColor: context.accentColor,
       contentPadding: EdgeInsets.symmetric(
-        horizontal: context.width * (isWeb ? 1 : 2.6),
-        vertical: context.height * (isWeb ? 2.3 : 2.6),
+        horizontal: context.width * 2,
+        vertical: context.height * 1.8,
       ),
 
       labelText: hintTextKey.translate,
@@ -34,6 +31,11 @@ class TextFormDeco {
             ? (context.width + context.height) / 1.5
             : context.width * 4.3,
       ),
+
+      disabledBorder: OutlineInputBorder(
+        borderRadius: isWeb ? BorderRadius.circular(5) : context.lowCircular,
+        borderSide: BorderSide(width: 1, color: context.darkGreyColor),
+      ),
       enabledBorder: OutlineInputBorder(
         borderRadius: isWeb ? BorderRadius.circular(5) : context.lowCircular,
         borderSide: BorderSide(width: 1, color: context.darkGreyColor),
@@ -49,12 +51,13 @@ class TextFormDeco {
                 left: context.width * 2,
                 right: context.width * (isWeb ? 1 : 1.5),
               ),
-              child: Icon(
-                prefixIcon,
-                color: context.darkGreyColor,
-                size: context.height * (isWeb ? 4 : 3.3),
+              child: prefixIcon
+              // Icon(
+              //   prefixIcon,
+              //   color: context.darkGreyColor,
+              //   size: context.height * (isWeb ? 4 : 3.3),
+              // ),
               ),
-            ),
     );
   }
 }

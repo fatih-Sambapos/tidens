@@ -6,9 +6,10 @@ import '../../core_shelf.dart';
 class RoundedTextButton extends StatelessWidget {
   final Function(String) onChanged;
   final String hintTextKey;
-  final IconData prefixIcon;
+  final Widget prefixIcon;
   final bool visibility;
   final bool isWeb;
+  final bool enabled;
   final Function()? changeVisibility;
   const RoundedTextButton({
     required this.onChanged,
@@ -18,13 +19,13 @@ class RoundedTextButton extends StatelessWidget {
     this.isWeb = false,
     Key? key,
     required this.prefixIcon,
+    required this.enabled,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(
-          fontSize: isWeb ? context.width * 1.2 : context.width * 4.3),
+      style: TextStyle(fontSize: context.width * 4.3),
       decoration: hintTextKey.contains('password')
           ? passDeco(context)
           : TextFormDeco.instance.loginDeco(
@@ -32,6 +33,7 @@ class RoundedTextButton extends StatelessWidget {
               hintTextKey,
               prefixIcon,
               isWeb,
+              enabled,
             ),
       onChanged: onChanged,
       obscureText:
@@ -41,12 +43,7 @@ class RoundedTextButton extends StatelessWidget {
 
   InputDecoration passDeco(BuildContext context) {
     return TextFormDeco.instance
-        .loginDeco(
-          context,
-          hintTextKey,
-          prefixIcon,
-          isWeb,
-        )
+        .loginDeco(context, hintTextKey, prefixIcon, isWeb, enabled)
         .copyWith(
           suffixIcon: Padding(
               padding: isWeb ? context.rightLow : context.rightMedium,
@@ -56,7 +53,7 @@ class RoundedTextButton extends StatelessWidget {
                   'login_password_visible'.toIconSVG,
                   color:
                       visibility ? context.primaryColor : context.darkGreyColor,
-                  height: context.height * (isWeb ? 1.3 : 1.5),
+                  height: context.height * 1.5,
                 ),
                 onPressed: changeVisibility ?? () {},
               )),
