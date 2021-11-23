@@ -87,7 +87,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
   Widget drawerBody() {
     return Column(children: [
       drawerListItem(drawerItems[0], [SizedBox()], drawerItemsIcon[0], false,
-          NavigationConstants.home),
+          NavigationConstants.bankAccounts),
       drawerListItem(drawerItems[1], [SizedBox()], drawerItemsIcon[1], false,
           NavigationConstants.home),
       // drawerListItem(
@@ -227,12 +227,17 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
   }
 
   Widget drawerTopUsername() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: AutoSizeText(
-        'Ivan Barayev',
-        style: context.headline5
-            .copyWith(color: context.accentColor, fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, NavigationConstants.profile);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: AutoSizeText(
+          'Ivan Barayev',
+          style: context.headline5.copyWith(
+              color: context.accentColor, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

@@ -6,3 +6,4 @@ export 'screens/transaction_history/transaction_history_shelf.dart';
 export 'components/components_shelf.dart';
 export 'profile/profile_shelf.dart';
 export 'settings/settings_shelf.dart';
+export 'screens/bank_accounts/bank_accounts_shelf.dart';

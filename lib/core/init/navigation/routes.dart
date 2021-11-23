@@ -13,6 +13,7 @@ mixin Routes {
     NavigationConstants.home: (_) => TabScreen(),
     NavigationConstants.swap: (_) => SwapScreen(),
     NavigationConstants.stake: (_) => StakeScreen(),
+    NavigationConstants.bankAccounts: (_) => BankAccounts(),
     NavigationConstants.transactionHistory: (_) => TransactionHistoryScreen(),
     NavigationConstants.settings: (_) => SettingsScreen(),
     NavigationConstants.profile: (_) => ProfileScreen(),
