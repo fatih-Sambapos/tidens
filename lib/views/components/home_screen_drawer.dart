@@ -83,31 +83,15 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
 
   List<String> drawerItemsIcon = ['chart', 'report', 'store'];
 
-  //List<bool> _isOpen = [false, false];
   Widget drawerBody() {
     return Column(children: [
       drawerListItem(drawerItems[0], [SizedBox()], drawerItemsIcon[0], false,
           NavigationConstants.bankAccounts),
       drawerListItem(drawerItems[1], [SizedBox()], drawerItemsIcon[1], false,
           NavigationConstants.home),
-      // drawerListItem(
-      //   drawerItems[1],
-      //   [drawerSubListItem("e.name")],
-      //   drawerItemsIcon[1],
-      //   true,
-      //   NavigationConstants.home,
-      // ),
-      // drawerListItem(
-      //   drawerItems[1],
-      //   [SizedBox()],
-      //   drawerItemsIcon[2],
-      //   false,
-      //   NavigationConstants.home,
-      // ),
     ]);
   }
 
-  // ignore: unused_field
   bool _onChanged = false;
   Widget drawerListItem(String headerItem, List<Widget>? subListItem,
       String icon, bool isExpasionTile, String? route) {
@@ -117,8 +101,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
           data: ThemeData(dividerColor: Colors.transparent),
           child: isExpasionTile
               ? ExpansionTile(
-
-                  // maintainState: true,
                   onExpansionChanged: (bool onChanged) {
                     _onChanged = onChanged;
                   },
@@ -234,7 +216,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: AutoSizeText(
-          'Ivan Barayev',
+          'Tidens User',
           style: context.headline5.copyWith(
               color: context.accentColor, fontWeight: FontWeight.bold),
         ),

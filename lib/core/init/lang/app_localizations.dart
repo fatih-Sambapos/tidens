@@ -36,8 +36,10 @@ class AppLocalizations {
         const Locale('ar'),
       ];
 
-  static List<String> get supportedLocalesCode =>
-      ['tr', 'en', 'de', 'nl', 'ar'];
+  static List<String> get supportedLocalesCode => [
+        'tr',
+        'en',
+      ];
 
   Future<bool> load() async {
     var jsonString =

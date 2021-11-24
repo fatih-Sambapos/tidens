@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tidens_coin/views/views_shelf.dart';
 import '../../../core/core_shelf.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -15,6 +16,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool visible = false;
   bool triedExit = false;
+  String email = '';
+  String password = '';
   @override
   void initState() {
     super.initState();
@@ -86,9 +89,86 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 )
               ],
             ),
-            profileCard()
+            profileCard(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  AutoSizeText("Edit Profile",
+                      style: context.headline6.copyWith(
+                          color: context.highlightColor,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20)),
+                ],
+              ),
+            ),
+            textField('email', Icon(Icons.mail_outline), true),
+            textField('username', Icon(Icons.person_outline), true),
+            textField('password', Icon(Icons.lock_outline), true),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.width * 4, vertical: context.height / 2),
+              child: Container(
+                  height: context.height * 5.5,
+                  decoration: BoxDecoration(
+                      color: context.accentColor,
+                      borderRadius: context.lowCircular,
+                      border: Border.all(color: context.darkGreyColor)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          right: 20,
+                        ),
+                        child: LanguageDropDown(isWeb: false),
+                      ),
+                    ],
+                  )),
+            ),
+            saveButton('save')
+            // textField('email', Icon(Icons.mail_outline), true),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget saveButton(String btnTextKey) {
+    var btnColor = context.primaryDarkColor;
+    if (email == '' || password == '') {
+      btnColor = context.secondaryGreen;
+    } else {
+      btnColor = context.secondaryGreen;
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 4, vertical: context.height),
+      child: RoundedButton(
+          buttonTextKey: btnTextKey,
+          action: () {},
+          borderRadius:
+              context.lowCircular, // BorderRadius.circular(isWeb ? 55 : 40),
+          backgroundColor: btnColor,
+          borderColor: btnColor,
+          borderWidth: 1,
+          textStyle: context.headline2
+              .copyWith(fontSize: context.height * 2, color: Colors.white)),
+    );
+  }
+
+  Widget textField(String type, Widget prefixIcon, bool enabled) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: context.width * 4, vertical: context.height / 2),
+      child: RoundedTextButton(
+        onChanged: type == 'username' ? _changeEmail : _changePass,
+        visibility: type == 'username' ? true : visible,
+        changeVisibility: _changeVisibility,
+        hintTextKey: type,
+        prefixIcon: prefixIcon,
+        // isWeb: false,
+        enabled: enabled,
       ),
     );
   }
@@ -99,7 +179,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Container(
         width: context.width * 95,
         decoration: BoxDecoration(
-            color: context.accentColor, border: Border.all(width: 0.2)),
+            borderRadius: context.lowCircular,
+            color: context.accentColor,
+            border: Border.all(width: 0.2)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -140,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Padding avatar() {
     return Padding(
-      padding: EdgeInsets.only(top: context.height * 12),
+      padding: EdgeInsets.only(top: context.height * 7),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -178,7 +260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: AutoSizeText(
-        'Ivan Barayev',
+        'Tidens User',
         style: context.headline6
             .copyWith(fontSize: 20, fontWeight: FontWeight.w600),
       ),
@@ -189,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Stack(
       children: [
         Container(
-          height: context.height * 20,
+          height: context.height * 15,
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Color(0xFF3C6FDD),
@@ -351,5 +433,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  void _changeEmail(String newEmail) {
+    setState(() {
+      email = newEmail;
+    });
+  }
+
+  void _changePass(String newPass) {
+    setState(() {
+      password = newPass;
+    });
+  }
+
+  void _changeVisibility() {
+    setState(() {
+      visible = !visible;
+    });
   }
 }

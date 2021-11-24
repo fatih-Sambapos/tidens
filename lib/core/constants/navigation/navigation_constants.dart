@@ -1,7 +1,7 @@
 class NavigationConstants {
-  static const String login = '/login';
+  static const String login = '/';
   static const String register = '/register';
-  static const String home = '/';
+  static const String home = '/home';
   static const String swap = '/swap';
   static const String stake = '/stake';
   static const String transactionHistory = '/transaction_history';
